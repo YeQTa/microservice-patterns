@@ -19,7 +19,7 @@ public class PaymentService {
     @Retryable(retryFor = {
             ConnectTimeOutException.class},
             maxAttempts = 5,
-            backoff = @Backoff(delay = 1000),
+            backoff = @Backoff(delay = 1000, multiplier = 2),
             recover = "doPaymentRecover")
     public void doPayment(TransactionDto transactionDto) {
         //Assume that balanceService is another microservice
